@@ -47,3 +47,9 @@ button {
   /* background-color: #18C7DE; */
   /* javascript to make this same size as imageSpace */
 }
+
+.pix {
+  background-color: #ff33cc;
+  position: absolute;
+  z-index:2;
+}
