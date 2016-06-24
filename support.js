@@ -42,6 +42,6 @@ function pointClick(event) {
   setTimeout(function(){
     document.getElementById(id).style.left = event.clientX.toString() + "px";
     document.getElementById(id).style.top = event.clientY.toString() + "px";
-  }, 1000);
+  }, 300);
 
 }
