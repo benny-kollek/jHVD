@@ -20,7 +20,8 @@ button {
   border-bottom: 5px solid #5E344A;
   padding: 5px;
   padding-left: 10px;
-  z-index:-1;
+  z-index:2;
+  position: absolute;
 }
 
 #pathLoadSpace {
@@ -35,10 +36,14 @@ button {
 #imageSpace {
   background-color: #9FB0B3;
   z-index:-1;
+  position:absolute;
 }
 
 #imageMaskSpace{
   z-index:1;
-  background-color: #18C7DE;
+  background-color: red;
+  opacity: 0.2;
+  position: absolute;
+  /* background-color: #18C7DE; */
   /* javascript to make this same size as imageSpace */
 }
