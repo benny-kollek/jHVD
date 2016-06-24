@@ -1,8 +1,9 @@
 function selectMarkers(){
-  loadImageMask();
+  showImageMask();
   if(document.getElementById("selectMarkersButton").innerHTML == "Done"){
     document.getElementById("selectMarkersButton").innerHTML = "Select Markers";
     document.getElementById("selectMarkersButton").style.color = "black";
+    hideImageMask();
   }
   else {
     document.getElementById("selectMarkersButton").innerHTML = "Done";
@@ -16,16 +17,16 @@ function loadImage(){
   document.getElementById("image").src = "lib/stills/v" + subjectN + "/001.png";
 };
 
-function loadImageMask() {
+function showImageMask() {
+  document.getElementById("imageMaskSpace").style.backgroundColor = "red";
   var maskSpace = document.getElementById("imageMaskSpace");
-  var image = document.getElementById("image");
-  var h = document.getElementById("image").height.toString() + "px";
-  var w = document.getElementById("image").width.toString() + "px";
-  console.log(h);
-  console.log(w);
 
-  maskSpace.style.height = h;
-  maskSpace.style.width = w;
+  if(maskSpace.style.height != "0px") { //setting height and width
+    maskSpace.style.height = document.getElementById("image").height.toString() + "px";
+    maskSpace.style.width = document.getElementById("image").width.toString() + "px";
+  }
+};
 
-
+function hideImageMask() {
+  document.getElementById("imageMaskSpace").style.backgroundColor = "transparent";
 };
