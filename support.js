@@ -17,16 +17,19 @@ function loadImage(){
   document.getElementById("image").src = "lib/stills/v" + subjectN + "/001.png";
 };
 
-function showImageMask() {
-  document.getElementById("imageMaskSpace").style.backgroundColor = "red";
+function loadMask(){
   var maskSpace = document.getElementById("imageMaskSpace");
+  maskSpace.style.height = document.getElementById("image").height.toString() + "px";
+  maskSpace.style.width = document.getElementById("image").width.toString() + "px";
+  document.getElementById("loadMaskButton").style.color = "green";
+  document.getElementById("loadMaskButton").innerHTML = "Mask Loaded";
+  document.getElementById("loadMaskButton").disabled = true;
+}
 
-  if(maskSpace.style.height != "0px") { //setting height and width
-    maskSpace.style.height = document.getElementById("image").height.toString() + "px";
-    maskSpace.style.width = document.getElementById("image").width.toString() + "px";
-  }
+function showImageMask() {
+  document.getElementById("imageMaskSpace").style.opacity = "0.2";
 };
 
 function hideImageMask() {
-  document.getElementById("imageMaskSpace").style.backgroundColor = "transparent";
+  document.getElementById("imageMaskSpace").style.opacity = "0";
 };

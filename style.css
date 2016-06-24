@@ -41,9 +41,9 @@ button {
 
 #imageMaskSpace{
   z-index:1;
-  background-color: red;
-  opacity: 0.2;
+  opacity: 0;
   position: absolute;
+  background-color: red;
   /* background-color: #18C7DE; */
   /* javascript to make this same size as imageSpace */
 }
