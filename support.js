@@ -61,6 +61,8 @@ function analyze(){
     var y = markedCoordinates[i].y;
     //in the following line I could potentially get an entire rectangle (for now 1 pixel)
     var pixelData = canvas.getContext('2d').getImageData(x, y, x+1, y+1).data;
-    console.log(pixelData);
+    markedCoordinates[i].r = pixelData[0];
+    markedCoordinates[i].g = pixelData[1];
+    markedCoordinates[i].b = pixelData[2];
   }
 }

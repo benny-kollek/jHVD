@@ -1,3 +1,7 @@
 Should make a phantom div over the image, with a div for each pixel (use javascript obviously)
 All the divs will have onclick -> js colour change function (for now), just to show that they’re highlighted
 the next part is retrieving the coordinates
+
+Need to run on a server (security issues)
+Solution on mac with python: (run the following from terminal)
+python -m SimpleHTTPServer
