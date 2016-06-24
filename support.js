@@ -37,7 +37,7 @@ function hideImageMask() {
 };
 
 function pointClick(event) {
-  markedCoordinates.push({x:event.clientX, y:event.clientY});
+  markedCoordinates.push({x:event.clientX, y:event.clientY, r: 0, g: 0, b:0});
   var id = event.clientX.toString() + 'x' + event.clientY.toString();
   console.log("Clicked: " + id);
   var newPix = '<div class="pix" id="' + id + '"></div>';
@@ -54,10 +54,10 @@ function analyze(){
   canvas.width = img.width;
   canvas.height = img.height;
   canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height);
-  //in the following line I could potentially get an entire rectangle (for now 1 pixel)
-//  var pixelData = canvas.getContext('2d').getImageData(xStart, yStart, xEnd, yEnd).data;
-}
 
-function getMarkedCoordinates() {
-
+  for(i=0; i<markedCoordinates.length; i++){
+    //in the following line I could potentially get an entire rectangle (for now 1 pixel)
+    //var pixelData = canvas.getContext('2d').getImageData(xStart, yStart, xEnd, yEnd).data;
+    
+  }
 }
