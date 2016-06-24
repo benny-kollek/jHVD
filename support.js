@@ -1,3 +1,5 @@
+markedCoordinates = [];
+
 function selectMarkers(){
   showImageMask();
   if(document.getElementById("selectMarkersButton").innerHTML == "Done"){
@@ -35,6 +37,7 @@ function hideImageMask() {
 };
 
 function pointClick(event) {
+  markedCoordinates.push({x:event.clientX, y:event.clientY});
   var id = event.clientX.toString() + 'x' + event.clientY.toString();
   console.log("Clicked: " + id);
   var newPix = '<div class="pix" id="' + id + '"></div>';
@@ -43,5 +46,18 @@ function pointClick(event) {
     document.getElementById(id).style.left = event.clientX.toString() + "px";
     document.getElementById(id).style.top = event.clientY.toString() + "px";
   }, 300);
+}
+
+function analyze(){
+  var img = document.getElementById('image');
+  var canvas = document.createElement('canvas');
+  canvas.width = img.width;
+  canvas.height = img.height;
+  canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height);
+  //in the following line I could potentially get an entire rectangle (for now 1 pixel)
+//  var pixelData = canvas.getContext('2d').getImageData(xStart, yStart, xEnd, yEnd).data;
+}
+
+function getMarkedCoordinates() {
 
 }
