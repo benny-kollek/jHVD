@@ -1,5 +1,6 @@
 body {
-  background-color: #A0A0A0;
+  /* Really nice color for this theme: #A0A0A0 */
+
   margin: 0;
   font-size: 22px;
 }
@@ -8,10 +9,6 @@ button {
   margin: 10px;
   font-size: 15px;
   border-radius: 5px;
-  float: right;
-}
-
-#imageSpace {
 }
 
 #optionSpace {
@@ -21,4 +18,27 @@ button {
   background-color: #967B89;
   float: left;
   border-bottom: 5px solid #5E344A;
+  padding: 5px;
+  padding-left: 10px;
+  z-index:-1;
+}
+
+#pathLoadSpace {
+  float: left;
+}
+
+#imageAnalysisSpace {
+  float: right;
+  margin-right: 20px;
+}
+
+#imageSpace {
+  background-color: #9FB0B3;
+  z-index:-1;
+}
+
+#imageMaskSpace{
+  z-index:1;
+  background-color: #18C7DE;
+  /* javascript to make this same size as imageSpace */
 }

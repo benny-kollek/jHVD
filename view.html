@@ -8,18 +8,23 @@
 
 <body onload="loadJS()">
   <div id="optionSpace">
-    <form action="">
-      Folder path: <input type="text" name="folderPath">
-      <input type="submit" value="Load">
-    <button type="button" id="selectMarkersButton" onclick="selectMarkers()">Select Markers</button>
-    <button type="button" id="analyzeButton">Analyze Images</button>
+    <div id="pathLoadSpace">
+      Subject Number: <input type="text" id="subjectNumber">
+      <button type="button" id="load" onclick="load()">Load</button>
+    </div>
+    <div id="imageAnalysisSpace">
+      <button type="button" id="selectMarkersButton" onclick="selectMarkers()">Select Markers</button>
+      <button type="button" id="analyzeButton">Analyze Images</button>
+    </div>
   </div>
 
   <div id="imageSpace">
-
-    <img src="lib/stills/v1/v1001.png" alt="img">
+    <img src="" alt="No Image Loaded" id="image">
       <!-- The assumption is all images will be same width/height -->
+      <!-- lib/stills/v1/001.png -->
+  </div>
 
+  <div id="imageMaskSpace">
   </div>
 
 </body>

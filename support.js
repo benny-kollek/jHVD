@@ -12,3 +12,11 @@ function selectMarkers(){
     document.getElementById("selectMarkersButton").style.color = "red";
   }
 };
+
+
+function load(){
+  var subjectN = document.getElementById("subjectNumber").value;
+  document.getElementById("image").src = "lib/stills/v" + subjectN + "/001.png";
+
+
+}
