@@ -48,6 +48,7 @@ function pointClick(event) {
   }, 300);
 }
 
+//add a circle to the page that changes to the color on what you clicked on to check that i'm getting the right thing
 function analyze(){
   var img = document.getElementById('image');
   var canvas = document.createElement('canvas');
@@ -56,8 +57,10 @@ function analyze(){
   canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height);
 
   for(i=0; i<markedCoordinates.length; i++){
+    var x = markedCoordinates[i].x;
+    var y = markedCoordinates[i].y;
     //in the following line I could potentially get an entire rectangle (for now 1 pixel)
-    //var pixelData = canvas.getContext('2d').getImageData(xStart, yStart, xEnd, yEnd).data;
-    
+    var pixelData = canvas.getContext('2d').getImageData(x, y, x+1, y+1).data;
+    console.log(pixelData);
   }
 }
