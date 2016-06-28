@@ -53,21 +53,26 @@ function pointClick(event) {
 }
 
 function analyze(){
-  var img = document.getElementById('image');
-  var canvas = document.createElement('canvas');
-  canvas.width = img.width;
-  canvas.height = img.height;
-  canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height);
+  if(markedCoordinates.length == 0){
+    window.alert("No coordinates have been selected")
+  }
+  else {
+    var img = document.getElementById('image');
+    var canvas = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height);
 
-  for(i=0; i<markedCoordinates.length; i++){
-    var x = markedCoordinates[i].x;
-    var y = markedCoordinates[i].y;
-    //in the following line I could potentially get an entire rectangle (for now 1 pixel)
-    var pixelData = canvas.getContext('2d').getImageData(x, y, x+1, y+1).data;
-    markedCoordinates[i].r = pixelData[0];
-    markedCoordinates[i].g = pixelData[1];
-    markedCoordinates[i].b = pixelData[2];
-    setBrightness(i);
+    for(i=0; i<markedCoordinates.length; i++){
+      var x = markedCoordinates[i].x;
+      var y = markedCoordinates[i].y;
+      //in the following line I could potentially get an entire rectangle (for now 1 pixel)
+      var pixelData = canvas.getContext('2d').getImageData(x, y, x+1, y+1).data;
+      markedCoordinates[i].r = pixelData[0];
+      markedCoordinates[i].g = pixelData[1];
+      markedCoordinates[i].b = pixelData[2];
+      setBrightness(i);
+    }
   }
 }
 
