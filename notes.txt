@@ -12,5 +12,8 @@ The formula I have used:
 http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
 
 
-To do:
-Disable select markers button until mask is loaded (window alert if mask not loaded)
+Use AJAX to access files hosted by the server. This will allow me to make an
+array of Subject objects, each having an array of Frame objects, each having
+an array of markedCoordinates.
+Side note: As I save to an excel sheet this array, I should also save the
+coordinates used. 
