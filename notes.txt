@@ -1,7 +1,15 @@
-Should make a phantom div over the image, with a div for each pixel (use javascript obviously)
-All the divs will have onclick -> js colour change function (for now), just to show that they’re highlighted
-the next part is retrieving the coordinates
-
 Need to run on a server (security issues)
-Solution on mac with python: (run the following from terminal)
+Solution on mac (provided python is installed):
 python -m SimpleHTTPServer
+
+
+Calculating brightness:
+http://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color
+
+http://stackoverflow.com/questions/9470599/how-to-calculate-brightness-of-rgb-color
+
+http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
+
+
+To do:
+Disable select markers button until mask is loaded (window alert if mask not loaded)

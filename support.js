@@ -37,7 +37,7 @@ function hideImageMask() {
 };
 
 function pointClick(event) {
-  markedCoordinates.push({x:event.clientX, y:event.clientY, r: 0, g: 0, b:0});
+  markedCoordinates.push({x:event.clientX, y:event.clientY, r: 0, g: 0, b:0, l1:0, l2:0, l3:0});
   var id = event.clientX.toString() + 'x' + event.clientY.toString();
   console.log("Clicked: " + id);
   var newPix = '<div class="pix" id="' + id + '"></div>';
@@ -48,7 +48,6 @@ function pointClick(event) {
   }, 300);
 }
 
-//add a circle to the page that changes to the color on what you clicked on to check that i'm getting the right thing
 function analyze(){
   var img = document.getElementById('image');
   var canvas = document.createElement('canvas');
@@ -64,5 +63,15 @@ function analyze(){
     markedCoordinates[i].r = pixelData[0];
     markedCoordinates[i].g = pixelData[1];
     markedCoordinates[i].b = pixelData[2];
+    setBrightness(i);
   }
+}
+
+//n is point in markedCoordinates array
+function setBrightness(n){
+  var r = markedCoordinates[n].r
+  var g = markedCoordinates[n].g
+  var b = markedCoordinates[n].b
+  markedCoordinates[n].l1 = Math.sqrt((0.241*r)+(0.691*g)+(0.068*b)
+  
 }
