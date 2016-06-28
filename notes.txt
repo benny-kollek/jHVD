@@ -8,6 +8,7 @@ http://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb
 
 http://stackoverflow.com/questions/9470599/how-to-calculate-brightness-of-rgb-color
 
+The formula I have used:
 http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
 
 

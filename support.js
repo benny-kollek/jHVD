@@ -37,7 +37,7 @@ function hideImageMask() {
 };
 
 function pointClick(event) {
-  markedCoordinates.push({x:event.clientX, y:event.clientY, r: 0, g: 0, b:0, l1:0, l2:0, l3:0});
+  markedCoordinates.push({x:event.clientX, y:event.clientY, r: 0, g: 0, b:0, l:0});
   var id = event.clientX.toString() + 'x' + event.clientY.toString();
   console.log("Clicked: " + id);
   var newPix = '<div class="pix" id="' + id + '"></div>';
@@ -72,6 +72,5 @@ function setBrightness(n){
   var r = markedCoordinates[n].r
   var g = markedCoordinates[n].g
   var b = markedCoordinates[n].b
-  markedCoordinates[n].l1 = Math.sqrt((0.241*r)+(0.691*g)+(0.068*b)
-  
+  markedCoordinates[n].l = Math.sqrt((0.241*r)*(0.241*r)+(0.691*g)*(0.691*g)+(0.068*b)*(0.068*b))
 }
