@@ -26,6 +26,10 @@ function loadMask(){
   document.getElementById("loadMaskButton").style.color = "green";
   document.getElementById("loadMaskButton").innerHTML = "Mask Loaded";
   document.getElementById("loadMaskButton").disabled = true;
+  document.getElementById("selectMarkersButton").disabled = false;
+  document.getElementById("analyzeButton").disabled = false;
+
+
 };
 
 function showImageMask() {
