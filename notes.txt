@@ -16,4 +16,4 @@ Use AJAX to access files hosted by the server. This will allow me to make an
 array of Subject objects, each having an array of Frame objects, each having
 an array of markedCoordinates.
 Side note: As I save to an excel sheet this array, I should also save the
-coordinates used. 
+coordinates used.
