@@ -17,3 +17,17 @@ array of Subject objects, each having an array of Frame objects, each having
 an array of markedCoordinates.
 Side note: As I save to an excel sheet this array, I should also save the
 coordinates used.
+Update: I'm just going to have a standard of naming files after MPEG
+    (s 001.png)
+    So no need for Ajax
+
+
+Need a reset button. After analyzing, if go to next subject, the coordinates
+are the same and so is the coordinateArray and the data.
+
+Right now program works at one subject at a time. Eventually I can consider
+having a subjects array in which all subjects will exist.
+  Why I might not need to do this: you still need to select markers for every
+  subject. In terms of efficiency of retrieving data, not necessarily faster
+  by having a subjects array. However, it will make analyzing data easier
+  (because it would all be in one place, hypothetically in one excel file)

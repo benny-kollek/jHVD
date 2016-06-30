@@ -1,3 +1,8 @@
+// hard coded global variables:
+frames = 240;
+
+// soft coded global variables:
+subject = [];
 markedCoordinates = [];
 
 function selectMarkers(){
@@ -15,8 +20,8 @@ function selectMarkers(){
 
 
 function loadImage(){
-  var subjectN = document.getElementById("subjectNumber").value;
-  document.getElementById("image").src = "lib/stills/" + subjectN + "/001.png";
+  subjectN = document.getElementById("subjectNumber").value;
+  document.getElementById("image").src = "lib/stills/" + subjectN + "/s 001.png";
 };
 
 function loadMask(){
@@ -52,28 +57,36 @@ function pointClick(event) {
   }, 300);
 }
 
-function analyze(){
+function analyzeSubject(){
   if(markedCoordinates.length == 0){
     window.alert("No coordinates have been selected")
   }
-  else {
+    else {
+      for(currentFrame = 1; currentFrame <= frames; currentFrame ++){
+        threeFrame = lpad(currentFrame, 3);
+        document.getElementById("image").src = "lib/stills/" + subjectN + "/s " + threeFrame + ".png";
+        analyzeFrame();
+        subject.push(markedCoordinates);
+    }
+  }
+}
+
+function analyzeFrame(){
     var img = document.getElementById('image');
     var canvas = document.createElement('canvas');
     canvas.width = img.width;
     canvas.height = img.height;
     canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height);
-
-    for(i=0; i<markedCoordinates.length; i++){
-      var x = markedCoordinates[i].x;
-      var y = markedCoordinates[i].y;
-      //in the following line I could potentially get an entire rectangle (for now 1 pixel)
-      var pixelData = canvas.getContext('2d').getImageData(x, y, x+1, y+1).data;
-      markedCoordinates[i].r = pixelData[0];
-      markedCoordinates[i].g = pixelData[1];
-      markedCoordinates[i].b = pixelData[2];
-      setBrightness(i);
-    }
-  }
+      for(i=0; i<markedCoordinates.length; i++){
+        var x = markedCoordinates[i].x;
+        var y = markedCoordinates[i].y;
+        //in the following line I could potentially get an entire rectangle (for now 1 pixel)
+        var pixelData = canvas.getContext('2d').getImageData(x, y, x+1, y+1).data;
+        markedCoordinates[i].r = pixelData[0];
+        markedCoordinates[i].g = pixelData[1];
+        markedCoordinates[i].b = pixelData[2];
+        setBrightness(i);
+      }
 }
 
 //n is point in markedCoordinates array
@@ -82,4 +95,9 @@ function setBrightness(n){
   var g = markedCoordinates[n].g
   var b = markedCoordinates[n].b
   markedCoordinates[n].l = Math.sqrt((0.241*r)*(0.241*r)+(0.691*g)*(0.691*g)+(0.068*b)*(0.068*b))
+}
+
+function lpad(value, padding) {
+    var zeroes = new Array(padding+1).join("0");
+    return (zeroes + value).slice(-padding);
 }
