@@ -65,15 +65,17 @@ function analyzeSubject(){
       for(currentFrame = 1; currentFrame <= frames; currentFrame ++){
         threeFrame = lpad(currentFrame, 3);
         document.getElementById("image").src = "lib/stills/" + subjectN + "/s " + threeFrame + ".png";
+        //put setTimout here
         analyzeFrame();
-        subject.push(markedCoordinates);
     }
   }
 }
+//PROBLEM IS THAT MARKEDCOORDINATES IS GLOBAL, CHANGE IT FOR EACH ITERATION
 
 function analyzeFrame(){
-    var img = document.getElementById('image');
-    var canvas = document.createElement('canvas');
+    var coordinates = markedCoordinates;
+    img = document.getElementById('image');
+    canvas = document.createElement('canvas');
     canvas.width = img.width;
     canvas.height = img.height;
     canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height);
@@ -82,19 +84,21 @@ function analyzeFrame(){
         var y = markedCoordinates[i].y;
         //in the following line I could potentially get an entire rectangle (for now 1 pixel)
         var pixelData = canvas.getContext('2d').getImageData(x, y, x+1, y+1).data;
-        markedCoordinates[i].r = pixelData[0];
-        markedCoordinates[i].g = pixelData[1];
-        markedCoordinates[i].b = pixelData[2];
-        setBrightness(i);
+        coordinates[i].r = pixelData[0];
+        coordinates[i].g = pixelData[1];
+        coordinates[i].b = pixelData[2];
+        coordinates[i].l = brightness(coordinates[i]);
+        console.log(coordinates);
       }
+    subject.push(coordinates);
 }
 
 //n is point in markedCoordinates array
-function setBrightness(n){
-  var r = markedCoordinates[n].r
-  var g = markedCoordinates[n].g
-  var b = markedCoordinates[n].b
-  markedCoordinates[n].l = Math.sqrt((0.241*r)*(0.241*r)+(0.691*g)*(0.691*g)+(0.068*b)*(0.068*b))
+function brightness(coordinates){
+  var r = coordinates.r;
+  var g = coordinates.g;
+  var b = coordinates.b;
+  return Math.sqrt((0.241*r)*(0.241*r)+(0.691*g)*(0.691*g)+(0.068*b)*(0.068*b))
 }
 
 function lpad(value, padding) {

@@ -31,3 +31,6 @@ having a subjects array in which all subjects will exist.
   subject. In terms of efficiency of retrieving data, not necessarily faster
   by having a subjects array. However, it will make analyzing data easier
   (because it would all be in one place, hypothetically in one excel file)
+
+
+FIX ISSUE OF COORDINATES HAVING SAME COORDINATES IN ALL FRAMES
