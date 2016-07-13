@@ -65,12 +65,14 @@ function analyzeSubject(){
       for(currentFrame = 1; currentFrame <= frames; currentFrame ++){
         threeFrame = lpad(currentFrame, 3);
         document.getElementById("image").src = "lib/stills/" + subjectN + "/s " + threeFrame + ".png";
-        //put setTimout here
+        // the above line is the problem. We need to wait for it to finish before moving on
         analyzeFrame();
+      //  console.log("working at frame: " + currentFrame);
+      //  console.log(document.getElementById("image").src);
+
     }
   }
 }
-//PROBLEM IS THAT MARKEDCOORDINATES IS GLOBAL, CHANGE IT FOR EACH ITERATION
 
 function analyzeFrame(){
     var coordinates = markedCoordinates;
@@ -88,7 +90,6 @@ function analyzeFrame(){
         coordinates[i].g = pixelData[1];
         coordinates[i].b = pixelData[2];
         coordinates[i].l = brightness(coordinates[i]);
-        console.log(coordinates);
       }
     subject.push(coordinates);
 }
