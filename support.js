@@ -45,6 +45,8 @@ function hideImageMask() {
   document.getElementById("imageMaskSpace").style.opacity = "0";
 };
 
+//Every time the image is clicked, a coordinate is added to the global array
+//And a divider is created to mark the spot that has been clicked
 function pointClick(event) {
   markedCoordinates.push({x:event.clientX, y:event.clientY, r: 0, g: 0, b:0, l:0});
   var id = event.clientX.toString() + 'x' + event.clientY.toString();
@@ -57,6 +59,8 @@ function pointClick(event) {
   }, 300);
 }
 
+//This function is run when the analyze button is clicked
+//CHecks if any coordinates have been clicked, then runs startOnloadLoop()
 function analyzeSubject(){
   if(markedCoordinates.length == 0){
     window.alert("No coordinates have been selected")
@@ -66,12 +70,12 @@ function analyzeSubject(){
     //     loadFrame(currentFrame, analyzeFrame);
     //     //analyzeFrame();
     // }
-    startOnLoadLoop();
+    document.getElementById("image").onload = analyzeFrame();
+    startOnloadLoop();
   }
 }
 
 function startOnloadLoop(){
-  document.getElementById("image").onload = analyzeFrame();
   incrementSrc();
 }
 
@@ -80,9 +84,13 @@ function getFrame(){
 }
 
 function incrementSrc(){
+  document.getElementById("image").onload = analyzeFrame();
+  console.log("reset onload event");
+  console.log("on frame: " + getFrame());
   var newFrame = lpad((getFrame() + 1), 3);
-  console.log(newFrame);
   document.getElementById("image").src = "lib/stills/" + subjectN + "/s " + newFrame + ".png";
+  console.log("incremented to frame : " + newFrame);
+  checkLoad();
 }
 
 //add an onload event to the image that calls analyze frame
@@ -91,21 +99,17 @@ function incrementSrc(){
 // the onload function analyzes the frame, then reloads itself
 //the onload function reads it's own image src and increases by one
 //until limit
-function loadFrame(currentFrame, callback){
-  threeFrame = lpad(currentFrame, 3);
-  //document.getElementById("image").src = "lib/stills/" + subjectN + "/s " + threeFrame + ".png";
-  // the above line is the problem. We need to wait for it to finish before moving on
-  $('#image').attr('src',"lib/stills/" + subjectN + "/s " + threeFrame + ".png");
+function checkLoad(){
   if(!document.getElementById("image").complete){
-    console.log(currentFrame + " did not load");
+    console.log(getFrame() + " did not load");
   }
   else{
-    console.log(currentFrame + " loaded")
+    console.log(getFrame() + " loaded")
   }
-  callback();
 }
 
 function analyzeFrame(){
+    console.log("analyzeFrame() has begun for frame " + getFrame());
     var coordinates = markedCoordinates;
     img = document.getElementById('image');
     canvas = document.createElement('canvas');
@@ -113,8 +117,8 @@ function analyzeFrame(){
     canvas.height = img.height;
     canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height);
       for(i=0; i<markedCoordinates.length; i++){
-        var x = markedCoordinates[i].x;
-        var y = markedCoordinates[i].y;
+        var x = coordinates[i].x;
+        var y = coordinates[i].y;
         //in the following line I could potentially get an entire rectangle (for now 1 pixel)
         var pixelData = canvas.getContext('2d').getImageData(x, y, x+1, y+1).data;
         coordinates[i].r = pixelData[0];
@@ -122,8 +126,16 @@ function analyzeFrame(){
         coordinates[i].b = pixelData[2];
         coordinates[i].l = brightness(coordinates[i]);
       }
-    subject.push(coordinates);
+      console.log("about to push");
+    subject.push($.extend(true, {}, coordinates));
+    console.log("coordinates of frame " + getFrame() + " pushed");
+    //console.log("current frame = " + getFrame());
+    if(getFrame() < 240){
+      startOnloadLoop();
+    }
 }
+
+//push a copy of the object to the subject
 
 //n is point in markedCoordinates array
 function brightness(coordinates){
