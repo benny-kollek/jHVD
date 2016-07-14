@@ -62,16 +62,47 @@ function analyzeSubject(){
     window.alert("No coordinates have been selected")
   }
     else {
-      for(currentFrame = 1; currentFrame <= frames; currentFrame ++){
-        threeFrame = lpad(currentFrame, 3);
-        document.getElementById("image").src = "lib/stills/" + subjectN + "/s " + threeFrame + ".png";
-        // the above line is the problem. We need to wait for it to finish before moving on
-        analyzeFrame();
-      //  console.log("working at frame: " + currentFrame);
-      //  console.log(document.getElementById("image").src);
-
-    }
+    //   for(currentFrame = 1; currentFrame <= frames; currentFrame ++){
+    //     loadFrame(currentFrame, analyzeFrame);
+    //     //analyzeFrame();
+    // }
+    startOnLoadLoop();
   }
+}
+
+function startOnloadLoop(){
+  document.getElementById("image").onload = analyzeFrame();
+  incrementSrc();
+}
+
+function getFrame(){
+  return parseInt(document.getElementById("image").src.slice(39,42));
+}
+
+function incrementSrc(){
+  var newFrame = lpad((getFrame() + 1), 3);
+  console.log(newFrame);
+  document.getElementById("image").src = "lib/stills/" + subjectN + "/s " + newFrame + ".png";
+}
+
+//add an onload event to the image that calls analyze frame
+//i can't use a loop to change the name of the src
+//tag it an onload function when we click analyze
+// the onload function analyzes the frame, then reloads itself
+//the onload function reads it's own image src and increases by one
+//until limit
+function loadFrame(currentFrame, callback){
+  threeFrame = lpad(currentFrame, 3);
+  //document.getElementById("image").src = "lib/stills/" + subjectN + "/s " + threeFrame + ".png";
+  // the above line is the problem. We need to wait for it to finish before moving on
+  $('#image').attr('src',"lib/stills/" + subjectN + "/s " + threeFrame + ".png");
+  if(!document.getElementById("image").complete){
+    console.log(currentFrame + " did not load");
+  }
+  else{
+    console.log(currentFrame + " loaded")
+  }
+  callback();
 }
 
 function analyzeFrame(){
