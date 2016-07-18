@@ -1,9 +1,11 @@
 // hard coded global variables:
 frames = 240;
+bufferTime = 40;
 
 // soft coded global variables:
 subject = [];
 markedCoordinates = [];
+
 
 function selectMarkers(){
   showImageMask();
@@ -66,17 +68,8 @@ function analyzeSubject(){
     window.alert("No coordinates have been selected")
   }
     else {
-    //   for(currentFrame = 1; currentFrame <= frames; currentFrame ++){
-    //     loadFrame(currentFrame, analyzeFrame);
-    //     //analyzeFrame();
-    // }
-    document.getElementById("image").onload = analyzeFrame();
-    startOnloadLoop();
-  }
-}
-
-function startOnloadLoop(){
-  incrementSrc();
+    analyzeFrame();
+    }
 }
 
 function getFrame(){
@@ -84,32 +77,29 @@ function getFrame(){
 }
 
 function incrementSrc(){
-  document.getElementById("image").onload = analyzeFrame();
-  console.log("reset onload event");
   console.log("on frame: " + getFrame());
   var newFrame = lpad((getFrame() + 1), 3);
+  //maybe pass parameter of the frame to analyze to analyzeFrame?
   document.getElementById("image").src = "lib/stills/" + subjectN + "/s " + newFrame + ".png";
   console.log("incremented to frame : " + newFrame);
-  checkLoad();
+  setTimeout(function(){
+    checkLoad(newFrame);
+  }, bufferTime);
 }
 
-//add an onload event to the image that calls analyze frame
-//i can't use a loop to change the name of the src
-//tag it an onload function when we click analyze
-// the onload function analyzes the frame, then reloads itself
-//the onload function reads it's own image src and increases by one
-//until limit
-function checkLoad(){
+function checkLoad(newFrame){
   if(!document.getElementById("image").complete){
-    console.log(getFrame() + " did not load");
+    console.log(getFrame(newFrame) + " did not load, try to increase buffer time");
   }
   else{
-    console.log(getFrame() + " loaded")
+    console.log(getFrame(newFrame) + " loaded")
+    analyzeFrame();
   }
 }
 
 function analyzeFrame(){
     console.log("analyzeFrame() has begun for frame " + getFrame());
+    document.getElementById("image").onload = null;
     var coordinates = markedCoordinates;
     img = document.getElementById('image');
     canvas = document.createElement('canvas');
@@ -129,15 +119,12 @@ function analyzeFrame(){
       console.log("about to push");
     subject.push($.extend(true, {}, coordinates));
     console.log("coordinates of frame " + getFrame() + " pushed");
-    //console.log("current frame = " + getFrame());
     if(getFrame() < 240){
-      startOnloadLoop();
+      console.log("about to increment frame");
+      incrementSrc();
     }
 }
 
-//push a copy of the object to the subject
-
-//n is point in markedCoordinates array
 function brightness(coordinates){
   var r = coordinates.r;
   var g = coordinates.g;
