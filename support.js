@@ -143,7 +143,7 @@ function lpad(value, padding) {
 
 
 function csvDownload(){
-  var csvArray = ["Subject Number", "Frame Number", "Point X", "Point Y", "R", "G", "B", "L"]
+  var csvArray = ["Subject Number", "Frame Number", "Point X", "Point Y", "R", "G", "B", "L", "\n"]
   for(n=0;n<subject.length; n++){
     for(m=0;m<Object.keys(subject[n]).length;m++){
       csvArray.push(subjectN);
@@ -154,6 +154,7 @@ function csvDownload(){
       csvArray.push(subject[n][m].g);
       csvArray.push(subject[n][m].b);
       csvArray.push(subject[n][m].l);
+      csvArray.push("\n");
       console.log(csvArray);
     }
   }
@@ -163,4 +164,12 @@ function csvDownload(){
   //use .join to turn the array into a string
   //make sure to use comma as separator
   //%0A?
+
+  var a         = document.createElement('a');
+  a.href        = 'data:attachment/csv,' +  encodeURIComponent(csvString);
+  a.target      = '_blank';
+  a.download    = 'data.csv';
+
+  document.body.appendChild(a);
+  a.click();
 }
