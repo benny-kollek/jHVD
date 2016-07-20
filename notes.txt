@@ -33,4 +33,5 @@ having a subjects array in which all subjects will exist.
   (because it would all be in one place, hypothetically in one excel file)
 
 
-FIX ISSUE OF COORDINATES HAVING SAME COORDINATES IN ALL FRAMES
+To work on now:
+Convert 1 subject to csv file

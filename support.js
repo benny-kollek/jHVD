@@ -1,6 +1,7 @@
 // hard coded global variables:
 frames = 240;
 bufferTime = 40;
+// note: subjectN is global by user input
 
 // soft coded global variables:
 subject = [];
@@ -123,6 +124,9 @@ function analyzeFrame(){
       console.log("about to increment frame");
       incrementSrc();
     }
+    else{
+      csvDownload();
+    }
 }
 
 function brightness(coordinates){
@@ -135,4 +139,28 @@ function brightness(coordinates){
 function lpad(value, padding) {
     var zeroes = new Array(padding+1).join("0");
     return (zeroes + value).slice(-padding);
+}
+
+
+function csvDownload(){
+  var csvArray = ["Subject Number", "Frame Number", "Point X", "Point Y", "R", "G", "B", "L"]
+  for(n=0;n<subject.length; n++){
+    for(m=0;m<Object.keys(subject[n]).length;m++){
+      csvArray.push(subjectN);
+      csvArray.push(n);
+      csvArray.push(subject[n][m].x);
+      csvArray.push(subject[n][m].y);
+      csvArray.push(subject[n][m].r);
+      csvArray.push(subject[n][m].g);
+      csvArray.push(subject[n][m].b);
+      csvArray.push(subject[n][m].l);
+      console.log(csvArray);
+    }
+  }
+  console.log(csvArray);
+  var csvString = csvArray.join(",");
+  console.log(csvString);
+  //use .join to turn the array into a string
+  //make sure to use comma as separator
+  //%0A?
 }
